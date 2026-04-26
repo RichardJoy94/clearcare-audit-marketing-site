@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(gunzip -c \"C:\\\\Users\\\\RichardsPC\\\\.claude\\\\projects\\\\C--Users-RichardsPC-ClearCare-Audit-Marketing-Page\\\\1bd27f83-4fbe-4013-8241-43536c5e1c84\\\\tool-results\\\\webfetch-1777238116920-afgcoz.bin\")",
+      "Bash(tar -x -O \"gtm-draft/chats/chat1.md\")",
+      "Bash(tar -t)",
+      "Bash(tar -x -O \"gtm-draft/chats/chat2.md\")"
+    ]
+  }
+}

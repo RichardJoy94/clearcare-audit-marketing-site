@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif), Georgia, serif;
+    letter-spacing: -0.02em;
+  }
+
+  code,
+  pre {
+    font-family: var(--font-mono), monospace;
+  }
+
+  input,
+  select,
+  button,
+  textarea {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-6 lg:px-[52px];
+  }
+
+  .section-tag {
+    @apply inline-flex items-center gap-3 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-ink-soft;
+  }
+
+  .section-tag::before {
+    content: "";
+    @apply h-px w-5 bg-current;
+  }
+
+  .section-tag-dark {
+    @apply text-[rgba(180,184,204,0.28)];
+  }
+
+  .section-tag-amber {
+    @apply text-amber;
+  }
+
+  .section-title {
+    @apply text-[2.35rem] font-medium leading-[0.98] text-ink sm:text-[2.9rem] lg:text-[3.5rem];
+  }
+
+  .section-title-dark {
+    @apply text-[#e4e6f4];
+  }
+
+  .section-copy {
+    @apply max-w-[40rem] text-[0.95rem] font-light leading-8 text-ink-mid;
+  }
+
+  .section-copy-dark {
+    @apply text-[#525878];
+  }
+
+  .panel {
+    @apply rounded-sm border;
+  }
+
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-glow {
+    background: radial-gradient(ellipse at center, rgba(184, 114, 30, 0.08) 0%, transparent 72%);
+  }
+
+  .prose-balance {
+    text-wrap: pretty;
+  }
+
+  .field {
+    @apply mb-3;
+  }
+
+  .field label {
+    @apply mb-1.5 block text-[0.68rem] font-medium tracking-[0.04em] text-[rgba(180,184,204,0.3)];
+  }
+
+  .field input,
+  .field select {
+    @apply w-full rounded-[2px] border border-white/10 bg-white/5 px-3.5 py-2.5 text-[0.84rem] text-[#a6acc8] outline-none transition focus:border-amber/40;
+  }
+
+  .field input::placeholder {
+    color: rgba(180, 184, 204, 0.2);
+  }
+}

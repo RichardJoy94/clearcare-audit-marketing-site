@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClearCare Audit — MRF Compliance Risk & Audit Evidence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#191b26;--ink-mid:#484c60;--ink-soft:#80849a;
+  --rule:#d0d2dc;--rule-lt:#e6e7ef;
+  --paper:#f7f6f3;--paper-alt:#f0efe9;
+  --slate:#161927;--slate-2:#1e2236;--slate-3:#252940;--slate-4:#0d0f1a;
+  --amber:#b8721e;--amber-lt:#cc8830;
+  --green:#2f6545;--red:#7c3328;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--slate);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(13,15,26,.92);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:58px;border-bottom:1px solid rgba(255,255,255,.04)}
+.nav-logo{font-family:var(--serif);font-size:1.05rem;font-weight:500;color:#909ab8;letter-spacing:.01em}
+.nav-logo b{color:var(--amber);font-weight:500}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center}
+.nav-links a{font-size:.7rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:#454862;text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:#8a8ea8}
+.nav-cta{background:var(--amber)!important;color:var(--slate)!important;padding:7px 18px;border-radius:2px;font-weight:600!important;color:var(--slate)!important}
+
+/* ─── SHARED ─── */
+.w{max-width:1140px;margin:0 auto;padding:0 52px}
+.tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.tag::before{content:'';width:18px;height:1px;background:currentColor}
+.tag-amber{color:var(--amber)}.tag-amber::before{background:var(--amber)}
+.tag-dim{color:rgba(180,184,204,.28)}.tag-dim::before{background:rgba(180,184,204,.28)}
+h2{font-family:var(--serif);font-size:clamp(2rem,3.2vw,3.2rem);font-weight:500;line-height:1.1;letter-spacing:-.01em}
+.lead{font-size:.92rem;font-weight:300;line-height:1.85;color:var(--ink-mid);max-width:580px}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* ─── HERO ─── */
+#hero{background:var(--slate);min-height:100svh;padding-top:58px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.hero-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-glow{position:absolute;top:-180px;right:-80px;width:700px;height:700px;background:radial-gradient(ellipse at center,rgba(184,114,30,.07) 0%,transparent 70%);pointer-events:none}
+.hero-inner{position:relative;z-index:2;padding:80px 52px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(184,114,30,.25);border-radius:2px;padding:5px 14px;margin-bottom:36px}
+.hero-eyebrow::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--amber);flex-shrink:0;animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-eyebrow span{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber)}
+#hero h1{font-family:var(--serif);font-size:clamp(3rem,5.5vw,5.6rem);font-weight:500;line-height:1.04;color:#eaedf8;letter-spacing:-.02em;max-width:820px;margin-bottom:28px}
+#hero h1 em{font-style:italic;color:var(--amber)}
+#hero h1 .thin{color:#525670;font-style:normal}
+.hero-sub{font-size:1rem;font-weight:300;line-height:1.78;color:#525878;max-width:520px;margin-bottom:44px;text-wrap:pretty}
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:64px}
+.btn-p{background:var(--amber);color:var(--slate);padding:13px 28px;border:none;cursor:pointer;font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;text-decoration:none;display:inline-block;transition:background .15s}
+.btn-p:hover{background:var(--amber-lt)}
+.btn-s{border:1px solid rgba(255,255,255,.09);color:#5a5e78;padding:12px 22px;font-family:var(--sans);font-size:.78rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;border-radius:2px;text-decoration:none;display:inline-block;transition:border-color .15s,color .15s}
+.btn-s:hover{border-color:rgba(255,255,255,.2);color:#9094b4}
+.hero-stats{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.05);padding-top:0}
+.hstat{padding:22px 44px 22px 0;border-right:1px solid rgba(255,255,255,.05);margin-right:44px}
+.hstat:last-child{border-right:none;padding-right:0;margin-right:0}
+.hstat-n{font-family:var(--serif);font-size:2.4rem;font-weight:500;color:var(--amber);line-height:1;margin-bottom:6px}
+.hstat-d{font-size:.73rem;color:#484c62;line-height:1.5;font-weight:300}
+.hstat-s{font-family:var(--mono);font-size:.56rem;color:#32364a;margin-top:4px}
+
+/* ─── CREDIBILITY STRIP ─── */
+.cred-strip{background:var(--slate-4);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);padding:16px 0}
+.cred-inner{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
+.cred-item{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(180,184,204,.22);display:flex;align-items:center;gap:9px}
+.cred-item::before{content:'';width:4px;height:4px;border-radius:50%;background:rgba(184,114,30,.35);flex-shrink:0}
+.cred-sep{width:1px;height:16px;background:rgba(255,255,255,.05)}
+
+/* ─── REALITY CHECK ─── */
+#reality{background:var(--slate-2);padding:72px 0;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
+.reality-inner{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.reality-l .tag{margin-bottom:18px}
+.reality-l h2{color:#e4e6f4;margin-bottom:20px}
+.reality-l p{font-size:.84rem;line-height:1.8;color:#525878;font-weight:300;font-style:italic;border-left:2px solid rgba(184,114,30,.3);padding-left:18px;margin-top:24px}
+.reality-questions{display:flex;flex-direction:column;gap:2px}
+.rq{border:1px solid rgba(255,255,255,.05);border-radius:3px;padding:20px 22px;background:var(--slate)}
+.rq-n{font-family:var(--mono);font-size:.54rem;letter-spacing:.14em;color:rgba(184,114,30,.35);display:block;margin-bottom:8px}
+.rq-q{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:#9094b4;line-height:1.3;margin-bottom:6px}
+.rq-sub{font-size:.74rem;line-height:1.6;color:#3e4260;font-weight:300}
+
+/* ─── TIME TO VALUE ─── */
+#ttv{background:var(--paper-alt);padding:80px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.ttv-head{margin-bottom:44px}
+.ttv-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.ttv-step{background:var(--paper);padding:28px 24px;position:relative}
+.ttv-step::after{content:'→';position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:rgba(184,114,30,.3);font-size:1rem;z-index:1}
+.ttv-step:last-child::after{display:none}
+.ttv-day{font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:10px}
+.ttv-step h4{font-family:var(--serif);font-size:1.15rem;font-weight:500;color:var(--ink);margin-bottom:7px;line-height:1.2}
+.ttv-step p{font-size:.76rem;line-height:1.62;color:var(--ink-mid);font-weight:300}
+.ttv-outcome{margin-top:28px;padding:18px 22px;background:var(--paper);border:1px solid var(--rule);border-radius:3px;display:flex;align-items:flex-start;gap:16px}
+.ttv-outcome-marker{font-family:var(--mono);font-size:.57rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);flex-shrink:0;padding-top:2px}
+.ttv-outcome-text{font-size:.8rem;line-height:1.68;color:var(--ink-mid);font-weight:300}
+.ttv-outcome-text strong{color:var(--ink);font-weight:500}
+
+/* ─── WHY THIS EXISTS ─── */
+#why{background:var(--paper);padding:96px 0}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--rule);border:1px solid var(--rule);margin-top:52px;border-radius:3px;overflow:hidden}
+.why-col{background:var(--paper);padding:40px 36px}
+.why-col.after{background:var(--paper-alt)}
+.why-col-head{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.why-col-head-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase}
+.why-col.before .why-col-head-label{color:rgba(124,51,40,.7)}
+.why-col.after .why-col-head-label{color:var(--amber)}
+.why-col-head-line{flex:1;height:1px}
+.why-col.before .why-col-head-line{background:rgba(124,51,40,.15)}
+.why-col.after .why-col-head-line{background:rgba(184,114,30,.2)}
+.why-item{display:flex;gap:13px;margin-bottom:18px;align-items:flex-start}
+.why-item:last-child{margin-bottom:0}
+.why-icon{width:18px;height:18px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center}
+.why-icon.bad svg{stroke:rgba(124,51,40,.6)}
+.why-icon.good svg{stroke:rgba(184,114,30,.8)}
+.why-item-text strong{display:block;font-size:.84rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.why-item-text span{font-size:.78rem;line-height:1.65;color:var(--ink-mid);font-weight:300}
+
+/* ─── WALKTHROUGH ─── */
+#walk{background:var(--slate);padding:96px 0}
+#walk h2{color:#e4e6f4}
+.walk-steps{margin-top:56px;display:flex;flex-direction:column;gap:2px}
+.walk-step{display:grid;grid-template-columns:72px 1fr 1.8fr;gap:0;border:1px solid rgba(255,255,255,.05);border-radius:3px;overflow:hidden}
+.walk-step+.walk-step{margin-top:2px}
+.walk-n{background:var(--slate-3);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;border-right:1px solid rgba(255,255,255,.05)}
+.walk-n-num{font-family:var(--mono);font-size:.62rem;color:var(--amber);letter-spacing:.12em}
+.walk-n-line{width:1px;height:20px;background:rgba(184,114,30,.2)}
+.walk-copy{padding:26px 28px;border-right:1px solid rgba(255,255,255,.05)}
+.walk-copy-tag{font-family:var(--mono);font-size:.57rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(180,184,204,.28);display:block;margin-bottom:10px}
+.walk-copy h3{font-family:var(--serif);font-size:1.35rem;font-weight:500;color:#cdd0e2;margin-bottom:10px}
+.walk-copy p{font-size:.78rem;line-height:1.72;color:#484c64;font-weight:300}
+.walk-ui{padding:20px 24px;background:var(--slate-4)}
+/* UI mock components */
+.ui-mock{font-family:var(--mono);font-size:.65rem}
+.ui-chrome{display:flex;align-items:center;gap:6px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.05)}
+.ui-chrome-dot{width:7px;height:7px;border-radius:50%}
+.ui-chrome-title{font-size:.56rem;letter-spacing:.1em;color:rgba(180,184,204,.2);margin-left:4px}
+.ui-row{display:flex;gap:8px;align-items:baseline;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.ui-row:last-child{border-bottom:none}
+.ui-label{color:rgba(180,184,204,.28);font-size:.58rem;width:130px;flex-shrink:0}
+.ui-val{color:#b0b4cc;font-size:.65rem}
+.ui-badge{display:inline-block;padding:1px 6px;border-radius:1px;font-size:.54rem;letter-spacing:.06em;font-weight:500}
+.ui-badge.high{background:rgba(124,51,40,.18);color:rgba(200,100,80,.9)}
+.ui-badge.med{background:rgba(184,114,30,.15);color:rgba(200,140,40,.9)}
+.ui-badge.ok{background:rgba(47,101,69,.15);color:rgba(60,140,90,.9)}
+.ui-progress{height:3px;background:rgba(255,255,255,.06);border-radius:1px;margin:4px 0}
+.ui-progress-fill{height:100%;border-radius:1px;background:var(--amber)}
+.ui-finding{padding:8px 10px;border:1px solid rgba(255,255,255,.05);border-radius:2px;margin-bottom:6px}
+.ui-finding:last-child{margin-bottom:0}
+.ui-finding-f{color:rgba(180,184,204,.7);font-size:.62rem;margin-bottom:2px}
+.ui-finding-v{font-size:.58rem;color:rgba(180,184,204,.28)}
+.ui-diff{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.ui-diff-b{background:rgba(124,51,40,.1);border:1px solid rgba(124,51,40,.15);padding:6px 8px;color:rgba(200,100,80,.7);font-size:.6rem;border-radius:2px;line-height:1.4}
+.ui-diff-a{background:rgba(47,101,69,.08);border:1px solid rgba(47,101,69,.15);padding:6px 8px;color:rgba(60,140,90,.8);font-size:.6rem;border-radius:2px;line-height:1.4}
+.ui-diff-label{font-size:.52rem;color:rgba(180,184,204,.2);margin-bottom:3px;display:block;letter-spacing:.08em;text-transform:uppercase}
+.ui-bundle-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.ui-bundle-row:last-child{border-bottom:none}
+.ui-bundle-icon{width:24px;height:24px;background:rgba(184,114,30,.08);border:1px solid rgba(184,114,30,.15);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ui-bundle-icon svg{width:11px;height:11px;stroke:var(--amber)}
+.ui-bundle-name{font-size:.63rem;color:rgba(180,184,204,.6);flex:1}
+.ui-bundle-status{font-size:.56rem;color:rgba(60,140,90,.8);letter-spacing:.08em;text-transform:uppercase}
+.ui-auth-block{border:1px solid rgba(184,114,30,.15);border-radius:2px;padding:10px;background:rgba(184,114,30,.03);margin-top:8px}
+.ui-auth-label{font-size:.54rem;color:rgba(184,114,30,.5);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;display:block}
+.ui-auth-name{font-size:.66rem;color:rgba(180,184,204,.6);margin-bottom:2px}
+.ui-auth-ts{font-size:.56rem;color:rgba(180,184,204,.24)}
+
+/* ─── TRANSFORMATION ─── */
+#transform{background:var(--paper);padding:96px 0}
+.transform-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--rule);border:1px solid var(--rule);margin-top:48px;border-radius:3px;overflow:hidden}
+.tr-col{padding:44px 40px}
+.tr-col.before{background:var(--paper-alt)}
+.tr-col.after{background:var(--paper)}
+.tr-col-head{margin-bottom:30px;padding-bottom:20px;border-bottom:1px solid var(--rule)}
+.tr-col-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:10px}
+.tr-col.before .tr-col-label{color:rgba(124,51,40,.5)}
+.tr-col.after .tr-col-label{color:var(--amber)}
+.tr-col-head h3{font-family:var(--serif);font-size:1.6rem;font-weight:500;line-height:1.15;color:var(--ink)}
+.tr-item{display:flex;flex-direction:column;gap:3px;padding:14px 0;border-bottom:1px solid var(--rule-lt)}
+.tr-item:last-child{border-bottom:none}
+.tr-item-head{font-size:.82rem;font-weight:500;color:var(--ink)}
+.tr-item-desc{font-size:.76rem;line-height:1.6;color:var(--ink-mid);font-weight:300}
+.tr-indicator{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;flex-shrink:0;vertical-align:middle}
+.tr-indicator.red{background:rgba(124,51,40,.5)}
+.tr-indicator.amber{background:rgba(184,114,30,.8)}
+
+/* ─── PROOF ─── */
+#proof{background:var(--slate);padding:96px 0}
+#proof h2{color:#e4e6f4}
+.proof-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-top:52px}
+.proof-text{}
+.proof-text p{font-size:.86rem;line-height:1.82;color:#525878;font-weight:300;margin-bottom:18px}
+.proof-text p:last-child{margin-bottom:0}
+.proof-props{display:flex;flex-direction:column;gap:16px;margin-top:32px}
+.proof-prop{padding:18px 20px;border:1px solid rgba(255,255,255,.05);border-radius:3px;background:var(--slate-2)}
+.proof-prop-tag{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:7px}
+.proof-prop h4{font-size:.86rem;font-weight:500;color:#b0b4cc;margin-bottom:5px}
+.proof-prop p{font-size:.74rem;line-height:1.65;color:#484c64;font-weight:300}
+.proof-bundle{border:1px solid rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.proof-bundle-head{background:var(--slate-3);padding:14px 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.05)}
+.proof-bundle-dots{display:flex;gap:5px}
+.proof-bundle-dot{width:8px;height:8px;border-radius:50%}
+.proof-bundle-title{font-family:var(--mono);font-size:.57rem;color:rgba(180,184,204,.24);letter-spacing:.1em;margin-left:4px}
+.proof-artifact{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.04)}
+.proof-artifact:last-child{border-bottom:none}
+.proof-art-idx{font-family:var(--mono);font-size:.56rem;color:rgba(184,114,30,.4);letter-spacing:.1em;padding-top:2px;width:24px;flex-shrink:0}
+.proof-art-body{}
+.proof-art-name{font-size:.79rem;font-weight:500;color:#9094b4;margin-bottom:4px}
+.proof-art-desc{font-size:.71rem;line-height:1.58;color:#3e4260;font-weight:300}
+
+/* ─── DIFFERENTIATION ─── */
+#diff{background:var(--paper-alt);padding:88px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.diff-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--rule);border:1px solid var(--rule);margin-top:48px;border-radius:3px;overflow:hidden}
+.diff-col{background:var(--paper);padding:32px 28px}
+.diff-col-tag{font-family:var(--mono);font-size:.57rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:14px}
+.diff-col h3{font-family:var(--serif);font-size:1.25rem;font-weight:500;color:var(--ink);margin-bottom:18px;line-height:1.2}
+.diff-problem{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--rule)}
+.diff-problem-label{font-size:.68rem;font-weight:600;color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;display:block}
+.diff-problem-items{display:flex;flex-direction:column;gap:8px}
+.diff-problem-item{font-size:.77rem;line-height:1.55;color:var(--ink-mid);font-weight:300;display:flex;gap:8px}
+.diff-problem-item::before{content:'—';color:rgba(124,51,40,.4);flex-shrink:0}
+.diff-clearcare-label{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:10px}
+.diff-clearcare-items{display:flex;flex-direction:column;gap:8px}
+.diff-clearcare-item{font-size:.77rem;line-height:1.55;color:var(--ink);font-weight:400;display:flex;gap:8px}
+.diff-clearcare-item::before{content:'→';color:var(--amber);flex-shrink:0;font-size:.72rem}
+
+/* ─── BUYERS ─── */
+#buyers{background:var(--paper);padding:96px 0;border-top:1px solid var(--rule)}
+.buyers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--rule);border:1px solid var(--rule);margin-top:48px;border-radius:3px;overflow:hidden}
+.buyer{background:var(--paper-alt);padding:36px 30px}
+.buyer-role{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:12px}
+.buyer h3{font-family:var(--serif);font-size:1.5rem;font-weight:500;color:var(--ink);margin-bottom:8px;line-height:1.15}
+.buyer-concern{font-size:.78rem;font-style:italic;color:var(--ink-soft);margin-bottom:22px;font-family:var(--serif);line-height:1.5}
+.buyer-items{display:flex;flex-direction:column;gap:13px}
+.buyer-item{}
+.buyer-item strong{display:block;font-size:.8rem;font-weight:600;color:var(--ink);margin-bottom:3px}
+.buyer-item span{font-size:.75rem;line-height:1.62;color:var(--ink-mid);font-weight:300}
+
+/* ─── PLATFORM ─── */
+#platform{background:var(--slate-2);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);padding:52px 0}
+.platform-inner{display:flex;align-items:center;gap:52px}
+.platform-tag{font-family:var(--mono);font-size:.57rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(184,114,30,.4);margin-bottom:10px;display:block}
+.platform-inner h3{font-family:var(--serif);font-size:1.35rem;font-weight:500;color:#6a6e88;max-width:480px;line-height:1.4}
+.platform-inner h3 em{color:#9094b4;font-style:italic}
+.platform-divider{width:1px;height:60px;background:rgba(255,255,255,.06);flex-shrink:0}
+.platform-detail{font-size:.78rem;line-height:1.7;color:#3e4260;font-weight:300;max-width:380px}
+
+/* ─── CTA ─── */
+#cta{background:var(--slate);padding:96px 0 80px}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.cta-l{}
+.cta-l .tag{margin-bottom:16px}
+#cta h2{color:#e4e6f4;margin-bottom:16px}
+.cta-l p{font-size:.86rem;line-height:1.78;color:#525878;font-weight:300;margin-bottom:32px;text-wrap:pretty}
+.cta-options{display:flex;flex-direction:column;gap:16px}
+.cta-opt{border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:22px 24px}
+.cta-opt-tag{font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:8px}
+.cta-opt h4{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:#9094b8;margin-bottom:5px}
+.cta-opt p{font-size:.74rem;line-height:1.6;color:#3e4260;font-weight:300}
+.cta-form-wrap{background:var(--slate-2);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:36px}
+.cta-form-label{font-family:var(--mono);font-size:.57rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(180,184,204,.22);margin-bottom:24px;display:block}
+.cf{margin-bottom:12px}
+.cf label{display:block;font-size:.68rem;font-weight:500;color:rgba(180,184,204,.3);margin-bottom:5px;letter-spacing:.04em}
+.cf input,.cf select{width:100%;font-family:var(--sans);font-size:.82rem;padding:10px 13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:2px;color:#9094b4;outline:none;transition:border-color .15s;-webkit-appearance:none}
+.cf input::placeholder{color:rgba(180,184,204,.14)}
+.cf input:focus,.cf select:focus{border-color:rgba(184,114,30,.35)}
+.cf select option{background:var(--slate-2);color:#9094b4}
+.cf-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-btns{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.form-btn-p{width:100%;background:var(--amber);color:var(--slate);padding:13px;border:none;cursor:pointer;font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;transition:background .15s}
+.form-btn-p:hover{background:var(--amber-lt)}
+.form-btn-s{width:100%;background:transparent;color:#454866;padding:11px;border:1px solid rgba(255,255,255,.06);cursor:pointer;font-family:var(--sans);font-size:.74rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;border-radius:2px;transition:border-color .15s,color .15s}
+.form-btn-s:hover{border-color:rgba(255,255,255,.14);color:#7a7e9a}
+.form-fine{margin-top:12px;font-size:.64rem;color:rgba(180,184,204,.14);text-align:center;line-height:1.5}
+
+/* ─── FOOTER ─── */
+footer{background:var(--slate-4);padding:28px 52px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.03)}
+.fl{font-family:var(--serif);font-size:.95rem;font-weight:500;color:rgba(180,184,204,.14)}
+.fl b{color:rgba(184,114,30,.28);font-weight:500}
+.fd{font-size:.63rem;color:rgba(180,184,204,.1);font-weight:300;max-width:440px;text-align:right;line-height:1.55}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  .reality-inner{grid-template-columns:1fr}
+  .ttv-steps{grid-template-columns:1fr}
+  .ttv-step::after{display:none}
+  .cred-inner{gap:18px}
+  nav{padding:0 24px}.nav-links{display:none}
+  .hero-inner,.w{padding-left:24px;padding-right:24px}
+  #hero h1{font-size:2.8rem}
+  .why-grid,.transform-grid,.cta-grid,.proof-layout,.diff-cols,.buyers-grid,#interpret>div>div:last-child{grid-template-columns:1fr}
+  .walk-step{grid-template-columns:48px 1fr}
+  .walk-ui{display:none}
+  .platform-inner{flex-direction:column;gap:20px}.platform-divider{display:none}
+  footer{flex-direction:column;gap:10px}.fd{text-align:center}
+  .hero-stats{flex-wrap:wrap}.hstat{padding:16px 0;border-right:none;margin-right:0;border-bottom:1px solid rgba(255,255,255,.05)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ClearCare <b>Audit</b></div>
+  <ul class="nav-links">
+    <li><a href="#why">The Problem</a></li>
+    <li><a href="#walk">How It Works</a></li>
+    <li><a href="#proof">Audit Evidence</a></li>
+    <li><a href="#buyers">Who It's For</a></li>
+    <li><a href="#cta" class="nav-cta">Request Demo</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-lines"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner w">
+    <div class="hero-eyebrow"><span>Hospital MRF Compliance · 45 CFR § 180</span></div>
+    <h1>Know if your pricing<br>files will <em>fail audit</em><br class="thin">—before CMS does.</h1>
+    <p class="hero-sub">Your MRF has violations you haven't found yet. ClearCare Audit tells you exactly where you're exposed — and gives you the evidence to prove you fixed it.</p>
+    <p style="font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:rgba(124,51,40,.6);margin-bottom:36px;margin-top:-28px;">CMS enforcement activity has increased every year since 2021. Corrective action penalties accrue from the date of violation — not the date of notice.</p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn-p">Get Your Risk Breakdown</a>
+      <a href="#walk" class="btn-s">See How It Works</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-n">$300</div>
+        <div class="hstat-d">Per-day civil monetary penalty,<br>per hospital — no cap</div>
+        <div class="hstat-s">45 CFR § 180.110</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n">&gt;50%</div>
+        <div class="hstat-d">Of audited hospitals received a CMS<br>corrective action request in 2023</div>
+        <div class="hstat-s">CMS Price Transparency Audit Program</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n">0</div>
+        <div class="hstat-d">Standard MRF vendors that produce<br>field-level compliance evidence</div>
+        <div class="hstat-s">ClearCare product assessment, 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CREDIBILITY STRIP ═══ -->
+<div class="cred-strip">
+  <div class="w">
+    <div class="cred-inner">
+      <div class="cred-item">Built around CMS audit workflows</div>
+      <div class="cred-sep"></div>
+      <div class="cred-item">Aligned to 45 CFR § 180</div>
+      <div class="cred-sep"></div>
+      <div class="cred-item">Designed with hospital compliance teams</div>
+      <div class="cred-sep"></div>
+      <div class="cred-item">Field-level findings, not a score</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ REALITY CHECK ═══ -->
+<section id="reality">
+  <div class="w">
+    <div class="reality-inner">
+      <div class="reality-l">
+        <div class="tag tag-dim rv">A Direct Question</div>
+        <h2 class="rv">Three things most<br>hospitals can't answer<br>when CMS asks.</h2>
+        <p class="rv">Most hospitals cannot answer any of these. ClearCare Audit exists to close that gap — before a corrective action request makes it urgent. In 2023, CMS issued corrective action notices to hospitals across 40+ states. The majority had no field-level documentation of their remediation.</p>
+      </div>
+      <div class="reality-questions rv">
+        <div class="rq">
+          <span class="rq-n">Question 01</span>
+          <div class="rq-q">Can you show which specific fields in your MRF violate 45 CFR § 180 — right now, today?</div>
+          <div class="rq-sub">Not a general assessment. Not a score. The exact fields, the exact rule citations, and the exact values that fail them.</div>
+        </div>
+        <div class="rq">
+          <span class="rq-n">Question 02</span>
+          <div class="rq-q">If you corrected your file last quarter, can you prove what changed and who authorized it?</div>
+          <div class="rq-sub">CMS corrective action requests ask for documentation of remediation — including who reviewed and approved each change before it was applied.</div>
+        </div>
+        <div class="rq">
+          <span class="rq-n">Question 03</span>
+          <div class="rq-q">Can you reproduce your compliance determination independently — without contacting a consultant?</div>
+          <div class="rq-sub">A defensible compliance posture is one any party can verify against the file and the rules. A consultant's report cannot be independently verified.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY THIS EXISTS ═══ -->
+<section id="why">
+  <div class="w">
+    <div class="tag rv">The Problem</div>
+    <h2 class="rv">Your pricing file is<br>a compliance liability<br>you can't currently see.</h2>
+    <p class="lead rv" style="margin-top:14px;">CMS audits are specific. They ask for exact fields, exact violations, and documented proof of remediation — and penalties accrue from the date the violation existed, not the date you learned about it. Most hospitals have none of that documentation, not because they aren't trying, but because no tool existed to produce it.</p>
+    <div class="why-grid rv">
+      <div class="why-col before">
+        <div class="why-col-head">
+          <span class="why-col-head-label">How hospitals manage MRF compliance today</span>
+          <div class="why-col-head-line"></div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon bad">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="1.5"><circle cx="7" cy="7" r="6"/><line x1="4.5" y1="4.5" x2="9.5" y2="9.5"/><line x1="9.5" y1="4.5" x2="4.5" y2="9.5"/></svg>
+          </div>
+          <div class="why-item-text">
+            <strong>No systematic rule evaluation</strong>
+            <span>Compliance is checked manually — if at all — against CMS guidance that most teams don't have time to parse in full.</span>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon bad">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="1.5"><circle cx="7" cy="7" r="6"/><line x1="4.5" y1="4.5" x2="9.5" y2="9.5"/><line x1="9.5" y1="4.5" x2="4.5" y2="9.5"/></svg>
+          </div>
+          <div class="why-item-text">
+            <strong>Fixes happen directly in the file</strong>
+            <span>Someone edits the JSON or CSV, uploads a new version, and the original error disappears. There is no record of what changed or who decided.</span>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon bad">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="1.5"><circle cx="7" cy="7" r="6"/><line x1="4.5" y1="4.5" x2="9.5" y2="9.5"/><line x1="9.5" y1="4.5" x2="4.5" y2="9.5"/></svg>
+          </div>
+          <div class="why-item-text">
+            <strong>Consultants produce reports, not evidence</strong>
+            <span>A PDF summary of findings does not satisfy a CMS corrective action request. The agency asks for traceable records, not narratives.</span>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon bad">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="1.5"><circle cx="7" cy="7" r="6"/><line x1="4.5" y1="4.5" x2="9.5" y2="9.5"/><line x1="9.5" y1="4.5" x2="4.5" y2="9.5"/></svg>
+          </div>
+          <div class="why-item-text">
+            <strong>No defensible audit trail</strong>
+            <span>When CMS asks who authorized a correction, most organizations cannot answer. Without a traceable record, the corrective action cycle restarts — and the penalty clock keeps running.</span>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon bad">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="1.5"><circle cx="7" cy="7" r="6"/><line x1="4.5" y1="4.5" x2="9.5" y2="9.5"/><line x1="9.5" y1="4.5" x2="4.5" y2="9.5"/></svg>
+          </div>
+          <div class="why-item-text">
+            <strong>Compliance posture is always unknown</strong>
+            <span>Without a structured evaluation, your organization doesn't know if it's compliant, partially compliant, or materially exposed. You find out when CMS does.</span>
+          </div>
+        </div>
+      </div>
+      <div class="why-col after">
+        <div class="why-col-head">
+          <span class="why-col-head-label">With ClearCare Audit</span>
+          <div class="why-col-head-line"></div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon good">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="1.5"><circle cx="7" cy="7" r="6"/><polyline points="4.5,7 6.5,9 9.5,5"/></svg>
+          </div>
+          <div class="why-item-text">
+            <strong>Every field evaluated against 45 CFR § 180</strong>
+            <span>A full scan maps each field in your MRF to the exact CMS requirement it must satisfy — and flags it by severity if it doesn't.</span>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon good">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="1.5"><circle cx="7" cy="7" r="6"/><polyline points="4.5,7 6.5,9 9.5,5"/></svg>
+          </div>
+          <div class="why-item-text">
+            <strong>Corrections are previewed and authorized, not improvised</strong>
+            <span>Every proposed change is shown to a named reviewer before it's applied. Authorization is recorded. The original file state is never overwritten.</span>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon good">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="1.5"><circle cx="7" cy="7" r="6"/><polyline points="4.5,7 6.5,9 9.5,5"/></svg>
+          </div>
+          <div class="why-item-text">
+            <strong>Structured evidence, not a narrative</strong>
+            <span>The output of a session is a linked record set — not a PDF. Finding-to-correction-to-approval, all verifiable against the file itself.</span>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon good">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="1.5"><circle cx="7" cy="7" r="6"/><polyline points="4.5,7 6.5,9 9.5,5"/></svg>
+          </div>
+          <div class="why-item-text">
+            <strong>Every action is permanently logged</strong>
+            <span>Who uploaded the file, who reviewed findings, who authorized corrections, when the evidence was exported — a complete record your counsel can stand behind.</span>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon good">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="1.5"><circle cx="7" cy="7" r="6"/><polyline points="4.5,7 6.5,9 9.5,5"/></svg>
+          </div>
+          <div class="why-item-text">
+            <strong>Compliance posture is a known, documented state</strong>
+            <span>After a session, your organization has a formal determination — compliant, non-compliant, or indeterminate — backed by the scan record that produced it.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WALKTHROUGH ═══ -->
+<section id="walk">
+  <div class="w">
+    <div class="tag tag-dim rv">How It Works</div>
+    <h2 class="rv" style="color:#e4e6f4;">Five steps from<br>uncertainty to evidence.</h2>
+    <p class="lead rv" style="margin-top:14px;color:#525878;">ClearCare Audit is a structured process — not a dashboard you configure. Each step produces a specific, versioned record. Together they constitute a defensible compliance session — the kind that holds up when CMS asks for documentation.</p>
+    <div class="walk-steps rv">
+
+      <!-- STEP 1 -->
+      <div class="walk-step">
+        <div class="walk-n"><span class="walk-n-num">01</span><div class="walk-n-line"></div></div>
+        <div class="walk-copy">
+          <span class="walk-copy-tag">Upload &amp; Intake</span>
+          <h3>Your file enters the system. A session record is created before anything else.</h3>
+          <p>Submit your MRF via direct upload or pre-signed URL. The system validates schema eligibility and creates a session ID that links every subsequent record. Your source file is never modified.</p>
+        </div>
+        <div class="walk-ui">
+          <div class="ui-mock">
+            <div class="ui-chrome">
+              <div class="ui-chrome-dot" style="background:#c0392b"></div>
+              <div class="ui-chrome-dot" style="background:#f39c12"></div>
+              <div class="ui-chrome-dot" style="background:#27ae60"></div>
+              <span class="ui-chrome-title">intake · session-7741 · 2026-04-14T09:17Z</span>
+            </div>
+            <div class="ui-row"><span class="ui-label">file</span><span class="ui-val">riverside-medical-mrf-2026-q1.json</span></div>
+            <div class="ui-row"><span class="ui-label">schema</span><span class="ui-val">cms-mrf-schema-v2.0.0</span></div>
+            <div class="ui-row"><span class="ui-label">size</span><span class="ui-val">4.2 MB · 18,440 charge rows</span></div>
+            <div class="ui-row"><span class="ui-label">status</span><span class="ui-val"><span class="ui-badge ok">eligible for scan</span></span></div>
+            <div class="ui-row"><span class="ui-label">session</span><span class="ui-val">session-7741 · initiated by M. Torres</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="walk-step">
+        <div class="walk-n"><span class="walk-n-num">02</span><div class="walk-n-line"></div></div>
+        <div class="walk-copy">
+          <span class="walk-copy-tag">Risk Scan</span>
+          <h3>Every field evaluated against the current CMS rule registry.</h3>
+          <p>Each field is evaluated against 45 CFR § 180's enumerated requirements. Rule citations are pinned to the registry version in use at scan time. High-severity findings — missing negotiated rates, invalid billing code types, absent header fields — represent your primary enforcement exposure. The scan record is immutable once created.</p>
+        </div>
+        <div class="walk-ui">
+          <div class="ui-mock">
+            <div class="ui-chrome">
+              <div class="ui-chrome-dot" style="background:#c0392b"></div>
+              <div class="ui-chrome-dot" style="background:#f39c12"></div>
+              <div class="ui-chrome-dot" style="background:#27ae60"></div>
+              <span class="ui-chrome-title">scan-2849 · cms-mrf-rules-v2024-01 · complete</span>
+            </div>
+            <div class="ui-row"><span class="ui-label">fields evaluated</span><span class="ui-val">18,440</span></div>
+            <div class="ui-row"><span class="ui-label">findings</span><span class="ui-val">14 total</span></div>
+            <div class="ui-row"><span class="ui-label">severity breakdown</span><span class="ui-val"><span class="ui-badge high">3 high</span>&nbsp;<span class="ui-badge med">7 medium</span>&nbsp;<span class="ui-badge ok">4 low</span></span></div>
+            <div class="ui-row"><span class="ui-label">rule version</span><span class="ui-val">cms-mrf-rules-v2024-01</span></div>
+            <div class="ui-progress"><div class="ui-progress-fill" style="width:100%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="walk-step">
+        <div class="walk-n"><span class="walk-n-num">03</span><div class="walk-n-line"></div></div>
+        <div class="walk-copy">
+          <span class="walk-copy-tag">Issue Breakdown</span>
+          <h3>Each violation mapped to the specific field, rule, and current value.</h3>
+          <p>Your compliance team reviews a finding table: field name, affected billing code, the CMS rule it fails, current value, and required value. Severity is assigned deterministically — not by configurable thresholds. The table is the basis for prioritizing remediation.</p>
+        </div>
+        <div class="walk-ui">
+          <div class="ui-mock">
+            <div class="ui-chrome">
+              <div class="ui-chrome-dot" style="background:#c0392b"></div>
+              <div class="ui-chrome-dot" style="background:#f39c12"></div>
+              <div class="ui-chrome-dot" style="background:#27ae60"></div>
+              <span class="ui-chrome-title">findings · scan-2849</span>
+            </div>
+            <div class="ui-finding">
+              <div class="ui-finding-f">payer_specific_negotiated_rate · code: 99213 <span class="ui-badge high" style="float:right">high</span></div>
+              <div class="ui-finding-v">45 CFR § 180.50(b)(2)(ii)(B) · current: null · required: non-null numeric</div>
+            </div>
+            <div class="ui-finding">
+              <div class="ui-finding-f">billing_code_type · code: 99213 <span class="ui-badge high" style="float:right">high</span></div>
+              <div class="ui-finding-v">45 CFR § 180.50(b)(1)(iii) · current: "cpt" · required: enumerated CPT</div>
+            </div>
+            <div class="ui-finding">
+              <div class="ui-finding-f">standard_charge_gross · code: 27447 <span class="ui-badge med" style="float:right">medium</span></div>
+              <div class="ui-finding-v">45 CFR § 180.50(b)(2)(i) · current: "N/A" · required: numeric</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="walk-step">
+        <div class="walk-n"><span class="walk-n-num">04</span><div class="walk-n-line"></div></div>
+        <div class="walk-copy">
+          <span class="walk-copy-tag">Controlled Fixes</span>
+          <h3>Corrections reviewed and authorized before any change is applied.</h3>
+          <p>For mechanically determinable violations, the system generates a side-by-side correction preview. A named reviewer authorizes each batch before anything is applied. The correction creates a new file state — the original is never overwritten. Both states exist permanently, linked by record ID.</p>
+        </div>
+        <div class="walk-ui">
+          <div class="ui-mock">
+            <div class="ui-chrome">
+              <div class="ui-chrome-dot" style="background:#c0392b"></div>
+              <div class="ui-chrome-dot" style="background:#f39c12"></div>
+              <div class="ui-chrome-dot" style="background:#27ae60"></div>
+              <span class="ui-chrome-title">fix-0041 · correction preview · pending authorization</span>
+            </div>
+            <div style="font-size:.57rem;color:rgba(180,184,204,.24);margin-bottom:7px;letter-spacing:.08em;text-transform:uppercase">billing_code_type · 99213</div>
+            <div class="ui-diff">
+              <div class="ui-diff-b"><span class="ui-diff-label">Before</span>"cpt"</div>
+              <div class="ui-diff-a"><span class="ui-diff-label">After</span>"CPT"</div>
+            </div>
+            <div class="ui-auth-block">
+              <span class="ui-auth-label">Authorization required</span>
+              <div class="ui-auth-name">J. Harmon — VP Compliance</div>
+              <div class="ui-auth-ts">2026-04-14 11:42:09 UTC · fix-0041 approved</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="walk-step">
+        <div class="walk-n"><span class="walk-n-num">05</span><div class="walk-n-line"></div></div>
+        <div class="walk-copy">
+          <span class="walk-copy-tag">Audit Proof Bundle</span>
+          <h3>One structured export. Six linked artifacts. Ready to give to CMS.</h3>
+          <p>The session produces a structured evidence bundle — not a PDF. Six linked artifacts: original scan, correction diffs, post-correction scan, governance log, rule snapshot, and a formal posture record. Everything CMS asks for in a corrective action response is already in this export.</p>
+        </div>
+        <div class="walk-ui">
+          <div class="ui-mock">
+            <div class="ui-chrome">
+              <div class="ui-chrome-dot" style="background:#c0392b"></div>
+              <div class="ui-chrome-dot" style="background:#f39c12"></div>
+              <div class="ui-chrome-dot" style="background:#27ae60"></div>
+              <span class="ui-chrome-title">bundle-0091 · session-7741 · exported 2026-04-14T14:30Z</span>
+            </div>
+            <div class="ui-bundle-row"><div class="ui-bundle-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="1.5"><rect x="1.5" y="1.5" width="9" height="9" rx="1"/><line x1="4" y1="6" x2="8" y2="6"/></svg></div><span class="ui-bundle-name">original_scan · scan-2849</span><span class="ui-bundle-status">immutable</span></div>
+            <div class="ui-bundle-row"><div class="ui-bundle-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="1.5"><rect x="1.5" y="1.5" width="9" height="9" rx="1"/><line x1="4" y1="6" x2="8" y2="6"/></svg></div><span class="ui-bundle-name">correction_diff · fix-0041</span><span class="ui-bundle-status">immutable</span></div>
+            <div class="ui-bundle-row"><div class="ui-bundle-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="1.5"><rect x="1.5" y="1.5" width="9" height="9" rx="1"/><line x1="4" y1="6" x2="8" y2="6"/></svg></div><span class="ui-bundle-name">post_correction_scan · scan-2850</span><span class="ui-bundle-status">immutable</span></div>
+            <div class="ui-bundle-row"><div class="ui-bundle-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="1.5"><rect x="1.5" y="1.5" width="9" height="9" rx="1"/><line x1="4" y1="6" x2="8" y2="6"/></svg></div><span class="ui-bundle-name">governance_log · session-7741</span><span class="ui-bundle-status">immutable</span></div>
+            <div class="ui-bundle-row"><div class="ui-bundle-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="1.5"><rect x="1.5" y="1.5" width="9" height="9" rx="1"/><line x1="4" y1="6" x2="8" y2="6"/></svg></div><span class="ui-bundle-name">compliance_posture · bundle-0091</span><span class="ui-bundle-status">verified</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT YOUR RESULTS MEAN ═══ -->
+<section id="interpret" style="background:var(--paper-alt);padding:80px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)">
+  <div class="w">
+    <div class="tag rv">Reading Your Findings</div>
+    <h2 class="rv">What your scan results<br>actually mean for<br>your audit exposure.</h2>
+    <p class="lead rv" style="margin-top:14px;">Not all violations carry the same risk. The scan tells you what's wrong. This tells you what to do about it — and how urgently.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin-top:44px" class="rv">
+      <div style="background:rgba(124,51,40,.04);padding:36px 30px;border-right:1px solid var(--rule)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:rgba(124,51,40,.6);flex-shrink:0"></span>
+          <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(124,51,40,.7)">High Severity — Immediate Risk</span>
+        </div>
+        <p style="font-size:.82rem;font-weight:600;color:var(--ink);margin-bottom:12px;line-height:1.3">These violations are the primary basis for CMS corrective action requests.</p>
+        <p style="font-size:.77rem;line-height:1.68;color:var(--ink-mid);font-weight:300;margin-bottom:16px">High-severity findings typically involve missing or null values for required rate fields, invalid billing code type formats, and absent required header fields. They are enumerated directly in 45 CFR § 180.50 and § 180.40.</p>
+        <p style="font-size:.77rem;line-height:1.68;color:var(--ink-mid);font-weight:300">If your file has high-severity findings, you have material exposure today. CMS does not require a prior warning before initiating a corrective action. Address these first.</p>
+      </div>
+      <div style="background:rgba(184,114,30,.03);padding:36px 30px;border-right:1px solid var(--rule)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:rgba(184,114,30,.7);flex-shrink:0"></span>
+          <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)">Medium Severity — Partial Compliance</span>
+        </div>
+        <p style="font-size:.82rem;font-weight:600;color:var(--ink);margin-bottom:12px;line-height:1.3">Your file satisfies some requirements but fails on specifics that auditors check.</p>
+        <p style="font-size:.77rem;line-height:1.68;color:var(--ink-mid);font-weight:300;margin-bottom:16px">Medium findings often involve field format errors (strings where numerics are required), missing optional-but-expected fields, or schema version mismatches. The file is partially compliant — but partial compliance is not a defense in a corrective action.</p>
+        <p style="font-size:.77rem;line-height:1.68;color:var(--ink-mid);font-weight:300">Resolve medium findings in the same remediation cycle as high findings. CMS reviews the file as a whole, not field by field in isolation.</p>
+      </div>
+      <div style="background:var(--paper);padding:36px 30px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:rgba(100,108,140,.5);flex-shrink:0"></span>
+          <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)">Patterns Across Low Findings — Systemic Issues</span>
+        </div>
+        <p style="font-size:.82rem;font-weight:600;color:var(--ink);margin-bottom:12px;line-height:1.3">Clusters of low-severity findings often indicate a pipeline or templating problem upstream.</p>
+        <p style="font-size:.77rem;line-height:1.68;color:var(--ink-mid);font-weight:300;margin-bottom:16px">If the same field type fails across dozens of billing codes, the issue is not in the data — it's in how the file is generated. Low findings concentrated in one field are more serious than scattered low findings across many fields.</p>
+        <p style="font-size:.77rem;line-height:1.68;color:var(--ink-mid);font-weight:300">The scan identifies patterns, not just counts. Review the distribution of low findings before dismissing them as low priority.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRANSFORMATION ═══ -->
+<section id="transform">
+  <div class="w">
+    <div class="tag rv">Before &amp; After</div>
+    <h2 class="rv">What changes when<br>your organization<br>runs a session.</h2>
+    <div class="transform-grid rv">
+      <div class="tr-col before">
+        <div class="tr-col-head">
+          <span class="tr-col-label">Before ClearCare Audit</span>
+          <h3>Compliance is a claim.<br>Not a record.</h3>
+        </div>
+        <div class="tr-item">
+          <div class="tr-item-head"><span class="tr-indicator red"></span>Exposure is invisible</div>
+          <div class="tr-item-desc">Your organization doesn't know which specific fields violate 45 CFR § 180 requirements until CMS tells you. By then, the corrective action clock has started.</div>
+        </div>
+        <div class="tr-item">
+          <div class="tr-item-head"><span class="tr-indicator red"></span>Fixes destroy evidence</div>
+          <div class="tr-item-desc">When someone corrects the file directly, the original violation disappears. There is nothing to show an auditor about what was wrong or how it was resolved.</div>
+        </div>
+        <div class="tr-item">
+          <div class="tr-item-head"><span class="tr-indicator red"></span>Authorization is informal</div>
+          <div class="tr-item-desc">Corrections happen via email, spreadsheet, or a direct file edit. The approval chain is reconstructed after the fact, if at all.</div>
+        </div>
+        <div class="tr-item">
+          <div class="tr-item-head"><span class="tr-indicator red"></span>Audit response is improvised</div>
+          <div class="tr-item-desc">A CMS corrective action request triggers a scramble — pulling emails, hunting for the original file version, drafting a narrative that can't be verified against the data.</div>
+        </div>
+      </div>
+      <div class="tr-col after">
+        <div class="tr-col-head">
+          <span class="tr-col-label">After ClearCare Audit</span>
+          <h3>Compliance is documented.<br>Defensible. Repeatable.</h3>
+        </div>
+        <div class="tr-item">
+          <div class="tr-item-head"><span class="tr-indicator amber"></span>Posture is known before CMS is involved</div>
+          <div class="tr-item-desc">A scan produces a complete, rule-cited finding list — organized by severity — before any corrective action is initiated. You are not learning about violations for the first time from an agency.</div>
+        </div>
+        <div class="tr-item">
+          <div class="tr-item-head"><span class="tr-indicator amber"></span>Original state is permanently preserved</div>
+          <div class="tr-item-desc">Corrections create a new file state alongside the original. Both exist, both are linked, and the record of what changed is attached to the authorization that approved it.</div>
+        </div>
+        <div class="tr-item">
+          <div class="tr-item-head"><span class="tr-indicator amber"></span>Every correction has a named, timestamped approver</div>
+          <div class="tr-item-desc">Your VP Compliance or equivalent reviews and formally authorizes corrections before they are applied. The authorization is embedded in the evidence record — not in an email thread.</div>
+        </div>
+        <div class="tr-item">
+          <div class="tr-item-head"><span class="tr-indicator amber"></span>Audit response is a bundle, not a scramble</div>
+          <div class="tr-item-desc">A CMS inquiry is answered by exporting the evidence bundle from the relevant session. Everything CMS asks for — violations, corrections, approvals — is already there.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROOF & TRUST ═══ -->
+<section id="proof">
+  <div class="w">
+    <div class="tag tag-dim rv">Audit Evidence</div>
+    <h2 class="rv" style="color:#e4e6f4;">The record holds up<br>because nothing in it<br>can be changed after the fact.</h2>
+    <div class="proof-layout rv">
+      <div class="proof-text">
+        <p>Most compliance tools produce reports. ClearCare Audit produces records. The difference matters when CMS asks not just what your posture is, but how you know — and who decided. Hospitals that received corrective action requests in 2023 and could not produce field-level documentation faced extended remediation timelines — some spanning multiple audit cycles.</p>
+        <p>Three structural properties make the evidence defensible. They are not policy commitments. They are enforced by how the system is built.</p>
+        <div class="proof-props">
+          <div class="proof-prop">
+            <span class="proof-prop-tag">Nothing is overwritten</span>
+            <h4>Every state is preserved exactly as it existed</h4>
+            <p>When a correction is applied, the original scan record stays intact. The system creates a new record alongside it. Your legal counsel can point to the exact state of the file at any point in the process — before the correction, after the correction, and at export.</p>
+          </div>
+          <div class="proof-prop">
+            <span class="proof-prop-tag">Full traceability</span>
+            <h4>Every action links back to a specific person and time</h4>
+            <p>Upload, scan, review, authorization, and export each create a timestamped entry in the governance log. The log is permanent and append-only — new entries are added, but nothing is retroactively altered.</p>
+          </div>
+          <div class="proof-prop">
+            <span class="proof-prop-tag">Reproducible findings</span>
+            <h4>The same file, evaluated against the same rules, produces the same result</h4>
+            <p>Scan results are pinned to a specific version of the CMS rule registry. Any party can verify that a scan result was correctly produced from a specific input and rule version — the output is not an interpretation.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="proof-bundle">
+          <div class="proof-bundle-head">
+            <div class="proof-bundle-dots">
+              <div class="proof-bundle-dot" style="background:#c0392b"></div>
+              <div class="proof-bundle-dot" style="background:#f39c12"></div>
+              <div class="proof-bundle-dot" style="background:#27ae60"></div>
+            </div>
+            <span class="proof-bundle-title">audit_evidence_bundle · bundle-0091 · session-7741</span>
+          </div>
+          <div class="proof-artifact">
+            <div class="proof-art-idx">01</div>
+            <div class="proof-art-body">
+              <div class="proof-art-name">Original Scan Record</div>
+              <div class="proof-art-desc">Complete field-level finding list from the initial evaluation. Every violation preserved exactly as found — including fields that were subsequently corrected. This state cannot be altered.</div>
+            </div>
+          </div>
+          <div class="proof-artifact">
+            <div class="proof-art-idx">02</div>
+            <div class="proof-art-body">
+              <div class="proof-art-name">Correction Diff Record</div>
+              <div class="proof-art-desc">Before/after for each corrected field, linked by record ID to both scans. Includes the reviewer's name, role, and authorization timestamp. Embedded in the record — not attached as a document.</div>
+            </div>
+          </div>
+          <div class="proof-artifact">
+            <div class="proof-art-idx">03</div>
+            <div class="proof-art-body">
+              <div class="proof-art-name">Post-Correction Scan</div>
+              <div class="proof-art-desc">A complete re-evaluation of the corrected file. Residual findings after remediation. The original scan coexists — both are present and linked.</div>
+            </div>
+          </div>
+          <div class="proof-artifact">
+            <div class="proof-art-idx">04</div>
+            <div class="proof-art-body">
+              <div class="proof-art-name">Governance Log</div>
+              <div class="proof-art-desc">Full timestamped record of every action in the session. Append-only. Covers upload through export — including who reviewed what and when.</div>
+            </div>
+          </div>
+          <div class="proof-artifact">
+            <div class="proof-art-idx">05</div>
+            <div class="proof-art-body">
+              <div class="proof-art-name">Rule Registry Snapshot</div>
+              <div class="proof-art-desc">The exact version of CMS requirements used at scan time. Allows any party to verify that findings were evaluated against the correct, current rules.</div>
+            </div>
+          </div>
+          <div class="proof-artifact">
+            <div class="proof-art-idx">06</div>
+            <div class="proof-art-body">
+              <div class="proof-art-name">Compliance Posture Record</div>
+              <div class="proof-art-desc">A formal determination — compliant, non-compliant, or indeterminate — with the scan IDs, rule version, and finding counts that produced it. What you attach to a CMS response.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DIFFERENTIATION ═══ -->
+<section id="diff">
+  <div class="w">
+    <div class="tag rv">vs. Alternatives</div>
+    <h2 class="rv">What you're working<br>with now — and why<br>it's not enough.</h2>
+    <p class="lead rv" style="margin-top:14px;">The three most common approaches to MRF compliance all share the same flaw: none of them produce evidence that satisfies a CMS corrective action request.</p>
+    <div class="diff-cols rv">
+      <div class="diff-col">
+        <span class="diff-col-tag">Alternative 01</span>
+        <h3>Compliance Consultants</h3>
+        <div class="diff-problem">
+          <span class="diff-problem-label">The problem</span>
+          <div class="diff-problem-items">
+            <div class="diff-problem-item">Engagements are slow and expensive — often six figures for a single audit cycle</div>
+            <div class="diff-problem-item">Output is a report, not a record. A PDF cannot be verified against your file.</div>
+            <div class="diff-problem-item">The next audit cycle starts over from scratch. Nothing is retained.</div>
+            <div class="diff-problem-item">Consultant methodology varies. Results between engagements are not comparable.</div>
+          </div>
+        </div>
+        <span class="diff-clearcare-label">ClearCare Audit instead</span>
+        <div class="diff-clearcare-items">
+          <div class="diff-clearcare-item">Repeatable scan at any time — no engagement required</div>
+          <div class="diff-clearcare-item">Every session produces a structured, verifiable record</div>
+          <div class="diff-clearcare-item">Previous sessions inform the next — history accumulates</div>
+        </div>
+      </div>
+      <div class="diff-col">
+        <span class="diff-col-tag">Alternative 02</span>
+        <h3>Internal Workflows</h3>
+        <div class="diff-problem">
+          <span class="diff-problem-label">The problem</span>
+          <div class="diff-problem-items">
+            <div class="diff-problem-item">Manual reviews are inconsistent — different staff, different interpretations, different results</div>
+            <div class="diff-problem-item">Direct file edits eliminate the evidence that a violation existed</div>
+            <div class="diff-problem-item">Authorization lives in email threads that no auditor can verify</div>
+            <div class="diff-problem-item">No version control means no before/after comparison at field level</div>
+          </div>
+        </div>
+        <span class="diff-clearcare-label">ClearCare Audit instead</span>
+        <div class="diff-clearcare-items">
+          <div class="diff-clearcare-item">Consistent evaluation — same rules, same logic, every time</div>
+          <div class="diff-clearcare-item">Source file never touched; all states preserved</div>
+          <div class="diff-clearcare-item">Authorization embedded in the evidence record</div>
+        </div>
+      </div>
+      <div class="diff-col">
+        <span class="diff-col-tag">Alternative 03</span>
+        <h3>Vendor Dashboards</h3>
+        <div class="diff-problem">
+          <span class="diff-problem-label">The problem</span>
+          <div class="diff-problem-items">
+            <div class="diff-problem-item">Most MRF vendors offer a "compliance score" — a number without a record behind it</div>
+            <div class="diff-problem-item">Opaque methodology means you cannot explain to CMS how the score was derived</div>
+            <div class="diff-problem-item">No field-level rule citations — findings can't be mapped to specific 45 CFR § 180 provisions</div>
+            <div class="diff-problem-item">No governance layer — changes happen in the pipeline with no authorization record</div>
+          </div>
+        </div>
+        <span class="diff-clearcare-label">ClearCare Audit instead</span>
+        <div class="diff-clearcare-items">
+          <div class="diff-clearcare-item">Findings cite exact CFR provisions — verifiable by any party</div>
+          <div class="diff-clearcare-item">Every change requires and records explicit authorization</div>
+          <div class="diff-clearcare-item">Methodology is pinned and reproducible — not a black box</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BUYERS ═══ -->
+<section id="buyers">
+  <div class="w">
+    <div class="tag rv">Who It's For</div>
+    <h2 class="rv">Three roles.<br>Three reasons this<br>matters to each.</h2>
+    <div class="buyers-grid rv">
+      <div class="buyer">
+        <span class="buyer-role">Finance Leadership</span>
+        <h3>CFO &amp;<br>Revenue Cycle</h3>
+        <p class="buyer-concern">"What is our actual audit exposure, and what would it cost if CMS acts?"</p>
+        <div class="buyer-items">
+          <div class="buyer-item">
+            <strong>Quantify the liability before it materializes</strong>
+            <span>ClearCare Audit produces a documented compliance posture — not an assumption. You can answer an audit risk question with a record, not a guess.</span>
+          </div>
+          <div class="buyer-item">
+            <strong>Reduce dependence on external compliance counsel</strong>
+            <span>A repeatable internal scan cycle replaces the expensive consultant engagement that produces a report you can't reuse or build on.</span>
+          </div>
+          <div class="buyer-item">
+            <strong>Predictable readiness, not reactive fire drills</strong>
+            <span>Compliance posture is evaluated on your schedule — not triggered by a CMS notice. At $300 per day with no cap, a 90-day corrective action cycle represents $27,000 in minimum exposure before remediation costs.</span>
+          </div>
+        </div>
+      </div>
+      <div class="buyer">
+        <span class="buyer-role">Compliance Leadership</span>
+        <h3>Chief Compliance<br>Officer</h3>
+        <p class="buyer-concern">"If CMS audits us tomorrow, can I produce a defensible record of what we did and who approved it?"</p>
+        <div class="buyer-items">
+          <div class="buyer-item">
+            <strong>Visibility at the rule level, not just a score</strong>
+            <span>Every finding includes the specific 45 CFR § 180 citation it violates. You can brief leadership or legal on exactly which requirements the file fails — and why.</span>
+          </div>
+          <div class="buyer-item">
+            <strong>Authorization is embedded, not reconstructed</strong>
+            <span>Every correction carries the name, role, and timestamp of the person who approved it — recorded at the moment of authorization, not assembled after the fact.</span>
+          </div>
+          <div class="buyer-item">
+            <strong>A defensible audit response, ready to send</strong>
+            <span>The evidence bundle is the response. Finding-to-correction-to-approval, all linked and verifiable against the file. When CMS asks, you export — you don't reconstruct.</span>
+          </div>
+        </div>
+      </div>
+      <div class="buyer">
+        <span class="buyer-role">Technology Leadership</span>
+        <h3>CTO &amp;<br>IT Leadership</h3>
+        <p class="buyer-concern">"What does this system touch, and what is the integration risk?"</p>
+        <div class="buyer-items">
+          <div class="buyer-item">
+            <strong>Source data is never modified</strong>
+            <span>ClearCare Audit is a read-only analysis layer. It does not touch your MRF pipeline, your EHR, or any other system of record. It evaluates a submitted file — nothing else.</span>
+          </div>
+          <div class="buyer-item">
+            <strong>Safe to integrate alongside existing infrastructure</strong>
+            <span>No mutation of upstream data. No dependency on internal pipeline access. Integration is a file submission, not a system connection.</span>
+          </div>
+          <div class="buyer-item">
+            <strong>Outputs are deterministic and independently verifiable</strong>
+            <span>Scan results are pinned to a versioned rule registry. The same input produces the same output — always. Your engineering team can verify the logic at any time.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TIME TO VALUE ═══ -->
+<section id="ttv">
+  <div class="w">
+    <div class="ttv-head rv">
+      <div class="tag">Time to Value</div>
+      <h2>What you have<br>in your first 7 days.</h2>
+      <p class="lead" style="margin-top:12px;">No integration project. No professional services engagement. Submit your file and you have a documented compliance posture within a week.</p>
+    </div>
+    <div class="ttv-steps rv">
+      <div class="ttv-step">
+        <span class="ttv-day">Day 1</span>
+        <h4>Upload your MRF</h4>
+        <p>Submit your current machine-readable file via direct upload. The system validates schema eligibility and creates a session record. Nothing in your existing pipeline is touched.</p>
+      </div>
+      <div class="ttv-step">
+        <span class="ttv-day">Day 1–2</span>
+        <h4>Receive your finding table</h4>
+        <p>Every field evaluated against current 45 CFR § 180 requirements. Violations listed by severity with exact rule citations. Your compliance team knows precisely where exposure exists.</p>
+      </div>
+      <div class="ttv-step">
+        <span class="ttv-day">Day 3–5</span>
+        <h4>Review and authorize corrections</h4>
+        <p>A named reviewer in your organization approves each proposed correction before it's applied. The authorization is recorded at the moment it happens — not reconstructed later.</p>
+      </div>
+      <div class="ttv-step">
+        <span class="ttv-day">Day 6–7</span>
+        <h4>Export your evidence bundle</h4>
+        <p>A structured, six-artifact evidence package. Original scan, correction record, post-correction scan, governance log, rule snapshot, and formal compliance posture. Ready for CMS if needed.</p>
+      </div>
+    </div>
+    <div class="ttv-outcome rv">
+      <span class="ttv-outcome-marker">After 7 days</span>
+      <p class="ttv-outcome-text">Your organization has a <strong>documented compliance posture, a field-level finding record, authorized corrections, and an audit-ready evidence bundle</strong> — none of which existed before. If CMS contacts you this week, you have something to hand them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PLATFORM TEASER ═══ -->
+<section id="platform">
+  <div class="w">
+    <div class="platform-inner">
+      <div>
+        <span class="platform-tag">Part of the ClearCare Platform</span>
+        <h3>ClearCare Audit is <em>the first layer</em> of an end-to-end compliance and governance stack for hospital pricing transparency.</h3>
+      </div>
+      <div class="platform-divider"></div>
+      <p class="platform-detail">The full ClearCare platform extends the audit and evidence layer into continuous compliance monitoring, multi-facility governance workflows, and regulatory reporting infrastructure. If you need more than a single-session audit today, ask about the platform roadmap.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section id="cta">
+  <div class="w">
+    <div class="cta-grid">
+      <div class="cta-l">
+        <div class="tag tag-dim">Get Started</div>
+        <h2>See where your<br>file stands today.</h2>
+        <p>We review your current MRF and show exactly where audit risk exists — rule by rule, field by field. Most organizations find at least one high-severity violation they were unaware of. Choose the path that fits where your organization is today.</p>
+        <div class="cta-options">
+          <div class="cta-opt" style="border-color:rgba(184,114,30,.2);background:rgba(184,114,30,.03)">
+            <span class="cta-opt-tag">Bring Your File</span>
+            <h4>Get a Compliance Risk Breakdown</h4>
+            <p>Submit your current MRF. We run a full scan, walk your compliance and legal team through the findings, and deliver a complete evidence bundle. A working session — not a demo.</p>
+          </div>
+          <div class="cta-opt">
+            <span class="cta-opt-tag">See the Output First</span>
+            <h4>Review Your Current MRF</h4>
+            <p>We evaluate your file and return a field-level finding report within one business day. No sessions, no commitment. The finding table is yours to keep, share internally, and act on.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="cta-form-wrap">
+          <span class="cta-form-label">Request Access</span>
+          <div class="cf-2">
+            <div class="cf"><label>First name</label><input type="text" placeholder="Sarah"></div>
+            <div class="cf"><label>Last name</label><input type="text" placeholder="Chen"></div>
+          </div>
+          <div class="cf"><label>Work email</label><input type="email" placeholder="s.chen@riverside-medical.org"></div>
+          <div class="cf"><label>Organization</label><input type="text" placeholder="Riverside Medical Center"></div>
+          <div class="cf">
+            <label>Your role</label>
+            <select>
+              <option value="">Select role</option>
+              <option>CFO / VP Finance</option>
+              <option>Chief Compliance Officer</option>
+              <option>VP Revenue Cycle</option>
+              <option>CTO / VP Technology</option>
+              <option>Legal Counsel</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="cf">
+            <label>What brings you here?</label>
+            <select>
+              <option value="">Select reason</option>
+              <option>Received a CMS corrective action request</option>
+              <option>Proactive compliance assessment</option>
+              <option>Replacing current compliance process</option>
+              <option>Evaluating audit readiness</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-btns">
+            <button class="form-btn-p">Get Your Risk Breakdown</button>
+            <button class="form-btn-s">Review Your Current MRF</button>
+          </div>
+          <p class="form-fine">Your MRF is not retained after the session. Findings are shared only with your team.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fl">ClearCare <b>Audit</b></div>
+  <div class="fd">ClearCare Audit evaluates hospital machine-readable pricing files against 45 CFR § 180 requirements. It does not generate MRFs and does not modify source data. This is not legal advice. Compliance determinations should be reviewed with qualified legal counsel.</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
