@@ -45,9 +45,11 @@ export function HowItWorks() {
 
               <div className="bg-slate-4 px-5 py-5">
                 <div className="rounded-[2px] border border-white/5 bg-transparent p-3 font-mono text-[0.64rem]">
-                  <WindowChrome title={step.mock?.title ?? `${step.label.toLowerCase()} · session-preview`} />
+                  <WindowChrome
+                    title={"mock" in step ? step.mock.title : `${step.label.toLowerCase()} · session-preview`}
+                  />
 
-                  {step.mock ? (
+                  {"mock" in step ? (
                     <div className="space-y-1.5">
                       {step.mock.rows.map(([label, value]) => (
                         <div
@@ -61,7 +63,7 @@ export function HowItWorks() {
                     </div>
                   ) : null}
 
-                  {step.findings ? (
+                  {"findings" in step ? (
                     <div className="space-y-2">
                       {step.findings.map((finding, index) => (
                         <div key={finding} className="rounded-[2px] border border-white/5 p-2.5">
@@ -74,7 +76,7 @@ export function HowItWorks() {
                     </div>
                   ) : null}
 
-                  {step.diff ? (
+                  {"diff" in step ? (
                     <div className="space-y-3">
                       <div className="text-[0.56rem] uppercase tracking-[0.08em] text-[rgba(180,184,204,0.22)]">
                         billing_code_type · 99213
@@ -94,14 +96,16 @@ export function HowItWorks() {
                         </div>
                       </div>
                       <div className="rounded-[2px] border border-amber/20 bg-amber/5 p-2.5">
-                        <div className="text-[0.54rem] uppercase tracking-[0.12em] text-amber/60">Authorization required</div>
+                        <div className="text-[0.54rem] uppercase tracking-[0.12em] text-amber/60">
+                          Authorization required
+                        </div>
                         <div className="mt-1 text-[0.64rem] text-[#9fa7c0]">{step.diff.approver}</div>
                         <div className="text-[0.56rem] text-[rgba(180,184,204,0.28)]">{step.diff.timestamp}</div>
                       </div>
                     </div>
                   ) : null}
 
-                  {step.bundle ? (
+                  {"bundle" in step ? (
                     <div className="space-y-1.5">
                       {step.bundle.map((item) => (
                         <div
@@ -144,7 +148,9 @@ export function HowItWorks() {
             </div>
 
             <div className="mt-7 flex flex-col gap-3 rounded-[3px] border border-rule bg-paper px-5 py-4 lg:flex-row lg:items-start">
-              <span className="shrink-0 font-mono text-[0.57rem] uppercase tracking-[0.14em] text-amber">After 7 days</span>
+              <span className="shrink-0 font-mono text-[0.57rem] uppercase tracking-[0.14em] text-amber">
+                After 7 days
+              </span>
               <p className="text-[0.82rem] font-light leading-7 text-ink-mid">
                 <strong className="font-medium text-ink">{howItWorks.timeline.outcome}</strong>
               </p>
