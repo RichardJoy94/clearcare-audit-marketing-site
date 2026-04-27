@@ -6,35 +6,46 @@ import { siteContent } from "@/content/site-content";
 export function ContactForm() {
   const { form } = siteContent.cta;
   const [status, setStatus] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setIsSubmitting(true);
+    setStatus(null);
 
-    const formData = new FormData(event.currentTarget);
-    const firstName = String(formData.get("firstName") ?? "").trim();
-    const lastName = String(formData.get("lastName") ?? "").trim();
-    const email = String(formData.get("email") ?? "").trim();
-    const organization = String(formData.get("organization") ?? "").trim();
-    const role = String(formData.get("role") ?? "").trim();
-    const reason = String(formData.get("reason") ?? "").trim();
+    const formElement = event.currentTarget;
+    const formData = new FormData(formElement);
+    const payload = {
+      firstName: String(formData.get("firstName") ?? "").trim(),
+      lastName: String(formData.get("lastName") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      organization: String(formData.get("organization") ?? "").trim(),
+      role: String(formData.get("role") ?? "").trim(),
+      reason: String(formData.get("reason") ?? "").trim()
+    };
 
-    const body = [
-      "New ClearCare Audit demo request",
-      "",
-      `First name: ${firstName}`,
-      `Last name: ${lastName}`,
-      `Work email: ${email}`,
-      `Organization: ${organization}`,
-      `Role: ${role}`,
-      `Reason: ${reason}`
-    ].join("\n");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
 
-    const mailtoUrl = `mailto:${encodeURIComponent(form.recipientEmail)}?subject=${encodeURIComponent(
-      form.subject
-    )}&body=${encodeURIComponent(body)}`;
+      const result = (await response.json()) as { error?: string; ok?: boolean };
 
-    window.location.href = mailtoUrl;
-    setStatus("Opening your email client to send this request to ClearCareHQ.");
+      if (!response.ok || !result.ok) {
+        throw new Error(result.error ?? "Unable to submit your request right now.");
+      }
+
+      formElement.reset();
+      setStatus("Request received. We'll follow up with your team shortly.");
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : "Unable to submit your request right now.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -109,9 +120,10 @@ export function ContactForm() {
       <div className="mt-5 space-y-2.5">
         <button
           type="submit"
+          disabled={isSubmitting}
           className="w-full rounded-[2px] bg-amber px-4 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-slate transition hover:bg-amber-light"
         >
-          {form.primaryAction}
+          {isSubmitting ? "Submitting..." : form.primaryAction}
         </button>
       </div>
 

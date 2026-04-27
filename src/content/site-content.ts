@@ -347,8 +347,6 @@ export const siteContent = {
     ],
     form: {
       title: "Request Access",
-      recipientEmail: "clearcarehq@gmail.com",
-      subject: "New ClearCare Audit demo request",
       roles: [
         "CFO / VP Finance",
         "Chief Compliance Officer",
