@@ -9,7 +9,32 @@ export function ContactForm() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus("Form submission is stubbed for now. Capture and backend wiring can be added when you're ready.");
+
+    const formData = new FormData(event.currentTarget);
+    const firstName = String(formData.get("firstName") ?? "").trim();
+    const lastName = String(formData.get("lastName") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const organization = String(formData.get("organization") ?? "").trim();
+    const role = String(formData.get("role") ?? "").trim();
+    const reason = String(formData.get("reason") ?? "").trim();
+
+    const body = [
+      "New ClearCare Audit demo request",
+      "",
+      `First name: ${firstName}`,
+      `Last name: ${lastName}`,
+      `Work email: ${email}`,
+      `Organization: ${organization}`,
+      `Role: ${role}`,
+      `Reason: ${reason}`
+    ].join("\n");
+
+    const mailtoUrl = `mailto:${encodeURIComponent(form.recipientEmail)}?subject=${encodeURIComponent(
+      form.subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoUrl;
+    setStatus("Opening your email client to send this request to ClearCareHQ.");
   }
 
   return (
@@ -21,27 +46,41 @@ export function ContactForm() {
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="field">
           <label htmlFor="firstName">First name</label>
-          <input id="firstName" name="firstName" type="text" placeholder="Sarah" autoComplete="given-name" />
+          <input id="firstName" name="firstName" type="text" placeholder="Sarah" autoComplete="given-name" required />
         </div>
         <div className="field">
           <label htmlFor="lastName">Last name</label>
-          <input id="lastName" name="lastName" type="text" placeholder="Chen" autoComplete="family-name" />
+          <input id="lastName" name="lastName" type="text" placeholder="Chen" autoComplete="family-name" required />
         </div>
       </div>
 
       <div className="field">
         <label htmlFor="email">Work email</label>
-        <input id="email" name="email" type="email" placeholder="s.chen@riverside-medical.org" autoComplete="email" />
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="s.chen@riverside-medical.org"
+          autoComplete="email"
+          required
+        />
       </div>
 
       <div className="field">
         <label htmlFor="organization">Organization</label>
-        <input id="organization" name="organization" type="text" placeholder="Riverside Medical Center" autoComplete="organization" />
+        <input
+          id="organization"
+          name="organization"
+          type="text"
+          placeholder="Riverside Medical Center"
+          autoComplete="organization"
+          required
+        />
       </div>
 
       <div className="field">
         <label htmlFor="role">Your role</label>
-        <select id="role" name="role" defaultValue="">
+        <select id="role" name="role" defaultValue="" required>
           <option value="" disabled>
             Select role
           </option>
@@ -55,7 +94,7 @@ export function ContactForm() {
 
       <div className="field">
         <label htmlFor="reason">What brings you here?</label>
-        <select id="reason" name="reason" defaultValue="">
+        <select id="reason" name="reason" defaultValue="" required>
           <option value="" disabled>
             Select reason
           </option>
@@ -73,12 +112,6 @@ export function ContactForm() {
           className="w-full rounded-[2px] bg-amber px-4 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-slate transition hover:bg-amber-light"
         >
           {form.primaryAction}
-        </button>
-        <button
-          type="button"
-          className="w-full rounded-[2px] border border-white/10 px-4 py-3 text-[0.74rem] font-medium uppercase tracking-[0.07em] text-[#6f7694] transition hover:border-white/20 hover:text-[#9aa0ba]"
-        >
-          {form.secondaryAction}
         </button>
       </div>
 

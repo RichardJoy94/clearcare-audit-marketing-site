@@ -337,21 +337,18 @@ export const siteContent = {
     tag: "Get Started",
     title: "See where your file stands today.",
     description:
-      "We review your current MRF and show exactly where audit risk exists, rule by rule and field by field. Choose the path that fits where your organization is today.",
+      "We review your current MRF and show exactly where audit risk exists, rule by rule and field by field. Request a demo and we will follow up directly with your team.",
     options: [
       {
         tag: "Bring Your File",
         title: "Get a Compliance Risk Breakdown",
         body: "Submit your current MRF for a full scan, a working review session, and a complete evidence bundle."
-      },
-      {
-        tag: "See the Output First",
-        title: "Review Your Current MRF",
-        body: "We evaluate your file and return a field-level finding report within one business day."
       }
     ],
     form: {
       title: "Request Access",
+      recipientEmail: "clearcarehq@gmail.com",
+      subject: "New ClearCare Audit demo request",
       roles: [
         "CFO / VP Finance",
         "Chief Compliance Officer",
@@ -368,7 +365,6 @@ export const siteContent = {
         "Other"
       ],
       primaryAction: "Get Your Risk Breakdown",
-      secondaryAction: "Review Your Current MRF",
       privacyNote: "Your MRF is not retained after the session. Findings are shared only with your team."
     }
   },
