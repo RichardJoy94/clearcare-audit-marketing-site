@@ -44,10 +44,10 @@ export function Problem() {
             {problem.questions.map((item) => (
               <article key={item.id} className="rounded-[3px] border border-white/5 bg-slate p-5 lg:p-6">
                 <span className="font-mono text-[0.54rem] uppercase tracking-[0.14em] text-amber/50">
-                  Question {item.id}
+                  Readiness question {item.id}
                 </span>
-                <h3 className="mt-2 text-[1.12rem] font-medium leading-6 text-[#a0a4be]">{item.question}</h3>
-                <p className="mt-2 text-[0.76rem] font-light leading-6 text-[#4d526c]">{item.answer}</p>
+                <h3 className="mt-2 text-[1.12rem] font-medium leading-6 text-[#c6cadc]">{item.question}</h3>
+                <p className="mt-2 text-[0.76rem] font-light leading-6 text-[#858da8]">{item.answer}</p>
               </article>
             ))}
           </div>

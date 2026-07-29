@@ -16,12 +16,12 @@ export function CTA() {
               <article
                 key={option.title}
                 className={`rounded-[3px] border p-6 ${
-                  index === 0 ? "border-amber/25 bg-amber/5" : "border-white/10 bg-transparent"
+                  index === 0 ? "border-amber/30 bg-amber/5" : "border-white/15 bg-white/[0.02]"
                 }`}
               >
                 <span className="font-mono text-[0.56rem] uppercase tracking-[0.14em] text-amber">{option.tag}</span>
-                <h3 className="mt-2 text-[1.12rem] font-medium text-[#9ca2bc]">{option.title}</h3>
-                <p className="mt-2 text-[0.75rem] font-light leading-6 text-[#434963]">{option.body}</p>
+                <h3 className="mt-2 text-[1.12rem] font-medium text-[#c8ccdd]">{option.title}</h3>
+                <p className="mt-2 text-[0.76rem] font-light leading-6 text-[#8991aa]">{option.body}</p>
               </article>
             ))}
           </div>

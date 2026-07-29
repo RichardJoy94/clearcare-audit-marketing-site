@@ -27,7 +27,18 @@ const mono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: siteContent.meta.title,
-  description: siteContent.meta.description
+  description: siteContent.meta.description,
+  metadataBase: new URL("https://www.clearcareaudit.com"),
+  alternates: {
+    canonical: "/"
+  },
+  openGraph: {
+    title: siteContent.meta.title,
+    description: siteContent.meta.description,
+    url: "/",
+    siteName: "ClearCare",
+    type: "website"
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

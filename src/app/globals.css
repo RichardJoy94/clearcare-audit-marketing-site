@@ -16,6 +16,10 @@
     overflow-x: hidden;
   }
 
+  section[id] {
+    scroll-margin-top: 58px;
+  }
+
   h1,
   h2,
   h3,
@@ -35,6 +39,20 @@
   textarea {
     font: inherit;
   }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid #cc8830;
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: rgba(184, 114, 30, 0.35);
+    color: #ffffff;
+  }
 }
 
 @layer components {
@@ -52,7 +70,7 @@
   }
 
   .section-tag-dark {
-    @apply text-[rgba(180,184,204,0.28)];
+    @apply text-[#8189a4];
   }
 
   .section-tag-amber {
@@ -72,7 +90,7 @@
   }
 
   .section-copy-dark {
-    @apply text-[#525878];
+    @apply text-[#9299b3];
   }
 
   .panel {
@@ -99,15 +117,34 @@
   }
 
   .field label {
-    @apply mb-1.5 block text-[0.68rem] font-medium tracking-[0.04em] text-[rgba(180,184,204,0.3)];
+    @apply mb-1.5 block text-[0.68rem] font-medium tracking-[0.04em] text-[#969db6];
   }
 
   .field input,
   .field select {
-    @apply w-full rounded-[2px] border border-white/10 bg-white/5 px-3.5 py-2.5 text-[0.84rem] text-[#a6acc8] outline-none transition focus:border-amber/40;
+    @apply w-full rounded-[2px] border border-white/15 bg-white/5 px-3.5 py-2.5 text-[0.84rem] text-[#d8dbea] outline-none transition focus:border-amber/60;
   }
 
   .field input::placeholder {
-    color: rgba(180, 184, 204, 0.2);
+    color: #707893;
+  }
+
+  .field select option {
+    background: #1e2236;
+    color: #d8dbea;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

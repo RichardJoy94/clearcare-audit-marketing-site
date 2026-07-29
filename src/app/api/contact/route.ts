@@ -9,6 +9,8 @@ type ContactPayload = {
   organization?: string;
   role?: string;
   reason?: string;
+  timeline?: string;
+  facilityCount?: string;
 };
 
 function missingEnvResponse() {
@@ -37,8 +39,10 @@ export async function POST(request: Request) {
   const organization = payload.organization?.trim() ?? "";
   const role = payload.role?.trim() ?? "";
   const reason = payload.reason?.trim() ?? "";
+  const timeline = payload.timeline?.trim() ?? "";
+  const facilityCount = payload.facilityCount?.trim() ?? "";
 
-  if (!firstName || !lastName || !email || !organization || !role || !reason) {
+  if (!firstName || !lastName || !email || !organization || !role || !reason || !timeline || !facilityCount) {
     return Response.json({ ok: false, error: "Please complete all fields before submitting." }, { status: 400 });
   }
 
@@ -59,16 +63,18 @@ export async function POST(request: Request) {
     to: toEmail,
     from: fromEmail,
     replyTo: email,
-    subject: "New ClearCare Audit demo request",
+    subject: "New ClearCare design-partner inquiry",
     text: [
-      "New ClearCare Audit demo request",
+      "New ClearCare design-partner inquiry",
       "",
       `First name: ${firstName}`,
       `Last name: ${lastName}`,
       `Work email: ${email}`,
       `Organization: ${organization}`,
       `Role: ${role}`,
-      `Reason: ${reason}`
+      `MRF trigger: ${reason}`,
+      `Next milestone: ${timeline}`,
+      `Facility scope: ${facilityCount}`
     ].join("\n")
   });
 

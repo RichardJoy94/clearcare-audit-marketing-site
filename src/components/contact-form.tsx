@@ -21,7 +21,9 @@ export function ContactForm() {
       email: String(formData.get("email") ?? "").trim(),
       organization: String(formData.get("organization") ?? "").trim(),
       role: String(formData.get("role") ?? "").trim(),
-      reason: String(formData.get("reason") ?? "").trim()
+      reason: String(formData.get("reason") ?? "").trim(),
+      timeline: String(formData.get("timeline") ?? "").trim(),
+      facilityCount: String(formData.get("facilityCount") ?? "").trim()
     };
 
     try {
@@ -40,7 +42,7 @@ export function ContactForm() {
       }
 
       formElement.reset();
-      setStatus("Request received. We'll follow up with your team shortly.");
+      setStatus("Thank you. We received your request and will follow up about fit and next steps.");
     } catch (error) {
       setStatus(error instanceof Error ? error.message : "Unable to submit your request right now.");
     } finally {
@@ -104,10 +106,10 @@ export function ContactForm() {
       </div>
 
       <div className="field">
-        <label htmlFor="reason">What brings you here?</label>
+        <label htmlFor="reason">Current MRF trigger</label>
         <select id="reason" name="reason" defaultValue="" required>
           <option value="" disabled>
-            Select reason
+            Select trigger
           </option>
           {form.reasons.map((reason) => (
             <option key={reason} value={reason}>
@@ -117,17 +119,49 @@ export function ContactForm() {
         </select>
       </div>
 
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div className="field">
+          <label htmlFor="timeline">Next milestone</label>
+          <select id="timeline" name="timeline" defaultValue="" required>
+            <option value="" disabled>
+              Select timing
+            </option>
+            {form.timelines.map((timeline) => (
+              <option key={timeline} value={timeline}>
+                {timeline}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="field">
+          <label htmlFor="facilityCount">Facility scope</label>
+          <select id="facilityCount" name="facilityCount" defaultValue="" required>
+            <option value="" disabled>
+              Select scope
+            </option>
+            {form.facilityCounts.map((facilityCount) => (
+              <option key={facilityCount} value={facilityCount}>
+                {facilityCount}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
       <div className="mt-5 space-y-2.5">
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded-[2px] bg-amber px-4 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-slate transition hover:bg-amber-light"
+          className="w-full rounded-[2px] bg-amber px-4 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.07em] text-slate transition hover:bg-amber-light disabled:cursor-not-allowed disabled:opacity-60 sm:text-[0.76rem]"
         >
           {isSubmitting ? "Submitting..." : form.primaryAction}
         </button>
       </div>
 
-      <p className="mt-3 text-center text-[0.64rem] leading-5 text-[rgba(180,184,204,0.16)]">{form.privacyNote}</p>
+      <p className="mt-4 border-l border-amber/30 pl-3 text-[0.68rem] leading-5 text-[#8e95ae]">
+        {form.privacyNote}
+      </p>
       {status ? (
         <p
           aria-live="polite"
