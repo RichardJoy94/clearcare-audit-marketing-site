@@ -22,7 +22,7 @@ const config: Config = {
         red: "#7c3328"
       },
       maxWidth: {
-        shell: "1140px"
+        shell: "1200px"
       },
       boxShadow: {
         panel: "0 24px 80px rgba(13, 15, 26, 0.18)"
